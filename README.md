@@ -11,13 +11,13 @@
 ## Récupérer le projet  
 
 ```bash
-git clone git@gitlab-etu.fil.univ-lille.fr:chaima.boudehane.etu/Boudehane_Mounguengui-COO.git
+git clone git@github.com:ChaimaBdh/projet-competitions-v1.git
 ```
 
 *se placer dans le répertoire*  
 
 ```bash
-cd Boudehane_Mounguengui-COO/Projet
+cd projet-competitions-v1
 ```
 
 # Avec le Makefile
