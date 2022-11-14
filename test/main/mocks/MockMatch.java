@@ -1,7 +1,7 @@
 package main.mocks;
 
 import main.Competitor;
-import main.Match;
+import main.match.Match;
 
 public class MockMatch implements Match {
 	

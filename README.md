@@ -1,6 +1,6 @@
 # Projet : Compétitions
 
-## Membres :
+## Membres du binôme :
 
 * Chaïma BOUDEHANE
 * Yannick MOUNGUENGUI
@@ -11,13 +11,13 @@
 ## Récupérer le projet  
 
 ```bash
-git clone git@github.com:ChaimaBdh/projet-competitions-v1.git
+git clone git@gitlab-etu.fil.univ-lille.fr:chaima.boudehane.etu/Boudehane_Mounguengui-COO.git
 ```
 
 *se placer dans le répertoire*  
 
 ```bash
-cd projet-competitions-v1
+cd Boudehane_Mounguengui-COO/Projet
 ```
 
 # Avec le Makefile
@@ -80,7 +80,7 @@ javadoc -sourcepath src -d doc -subpackages main
 ```
 
 *consulter*    
-  
+
 Ouvrir le fichier **index.html** situé dans le dossier **/doc** dans le navigateur.
 
 
@@ -109,7 +109,7 @@ java -jar competition.jar
 *compiler*  
 
 ```bash
-javac -d classes -classpath ./lib/junit-platform-console-standalone-1.9.0.jar ./src/main/*.java  ./src/main/competitions/*.java ./src/main/strategy/*.java ./src/main/exceptions/*.java ./src/main/util/*.java ./test/main/*.java ./test/main/competitions/*.java ./test/main/mocks/*.java ./test/main/strategy/*.java
+javac -d classes -classpath ./lib/junit-platform-console-standalone-1.9.0.jar ./src/main/*.java  ./src/main/competitions/*.java ./src/main/strategy/*.java ./src/main/exceptions/*.java ./src/main/util/*.java ./src/main/match/*.java ./test/main/*.java ./test/main/competitions/*.java ./test/main/mocks/*.java ./test/main/strategy/*.java
 ```
 
 *exécuter*  
@@ -128,7 +128,7 @@ rm -r doc classes competition.jar
 
 ## Livrable 1
 
-![](uml/UML-livrable1.jpg)    
+![](uml/UML-v1.jpg)    
 
 ## Choix de conception  
 
@@ -162,11 +162,36 @@ La méthode selectMatch() permet à l'utilisateur de choisir le type de match qu
 
 Cette idée de conception a pour but de simplifier la méthode `playMatch`. Celle-ci n'aura qu'une ligne de code qui consistera à afficher le gagnant selon le type de match choisi par l'utilisateur : elle appelle la méthode getWinner spécifique au type de match.   
 
-  
+
 ### Mocks et classes de tests abstraites  
 
 Nous avons utilisé des Mocks afin de tester les appels de certaines méthodes : `MockCompetition` et `MockMatch` permettent de vérifier l'appel de méthodes telles que play, playMatch, displayMatchPossible, etc...
 
-De plus, nous avons créé une classe de tests abstraite `CompetitionTest`, car nous savons que League et Tournament héritent de Competition dans le code source. Cela permettra à LeagueTest et TournamentTest d'hériter de ces méthodes de test qui, pour la plupart sont identiques. 
+De plus, nous avons créé une classe de tests abstraite `CompetitionTest`, car nous savons que League et Tournament héritent de Competition dans le code source. Cela permettra à LeagueTest et TournamentTest d'hériter de ces méthodes de test qui, pour la plupart sont identiques.
 
 
+
+## Livrable 2 (en cours)
+
+![](uml/UML-v2.jpg)      
+
+
+## Choix de conception  
+
+### Design Pattern
+
+#### Factory Method
+
+Lors de l'écriture des tests, nous avons utilisé le pattern `factory method`. En effet, dans `CompetitionTest` nous avons défini une méthode abstraite `createOneCompetition()` que nous avons redéfinie dans les classes filles (LeagueTest, TournamentTest et MasterTest). Cette méthode a pour but de créer des compétitions (instances) propres aux classes héritant de CompetitionTest.
+
+
+#### Strategy
+
+Le pattern `Strategy` a été essentiel pour la sélection des compétiteurs en phase finale. Pour permettre la sélection des compétiteurs, nous avons créé une interface `Selection` implémentée par trois classes :   
+
+* **SelectFirst** : sélectionne les premiers de chaque poule. *(Master 16)*
+* **SelectTwoFirst** : sélectionne les 2 premiers de chaque poule. *(Master 24)*
+* **SelectTwoFirstThenTwoBestThird** : sélectionne les 2 premiers de chaque poule puis les 2 meilleurs troisièmes. *(Master 32)* 
+
+Le type de sélection est précisé à la construction du Master afin que le nombre de compétiteurs en phase finale soit bien une puissance de 2. 
+Ainsi le type de sélection sera spécifique au nombre de compétiteurs du Master.

@@ -1,72 +1,26 @@
 package main;
 
 import java.util.*;
-import main.util.*;
-import main.exceptions.*;
+
+import main.match.*;
+import main.util.MapUtil;
+import main.exceptions.UnknownPlayerException;
 
 
 /** A class that represents a competition */
 public abstract class Competition {
 
   /** A list of competitors */
-  public final List<Competitor> competitors;
-  
+  protected final List<Competitor> competitors;
+
   /** A kind of match */
-  public Match match;
-  
-  /** A list of all kind of match that can be played */
-  public List<Match> matchs;
-  
-  /** The scanner */
-  Scanner scan;
-  
+  protected Match match = new RandomWinner();
+
   /** A competition is defined by a given list of competitors
    * @param comp the list
    */
   public Competition(List<Competitor> comp) {
     this.competitors = comp;
-    this.matchs = new ArrayList<>();
-  }
-  
-  /** Adds a match to the list of match 
-   * @param m the kind of match to add
-   */
-  public void addMatch(Match m) {
-	  this.matchs.add(m);
-  }
-
-  
-  /**
-   * Displays all kind of match possible for the competition 
-   */
-  public void displayMatchPossible() {
-	 System.out.println("Select the type of match you want \n");
-	 int i = 0;
-	 // displays all match available to play
-	 for(Match m : this.matchs) {
-		 System.out.println(i + " - " + m + "\n");
-		 i++;
-	 }
-  }
-
-  
-  /** 
-   * Selects a kind of match (how we will get the winner)
-   */
-  public void selectMatch() {
-	  this.displayMatchPossible();
-	  scan = new Scanner(System.in);
-	  int i = scan.nextInt();
-		  
-	  Match matchChosen = this.matchs.get(i);
-	  this.match = matchChosen;
-  }
-  
-  /**
-   * @return the list of all competitors
-   */
-  public List<Match> getAllMatch() {
-	  return this.matchs;
   }
 
   /** Adds a competitor of the list
@@ -97,6 +51,17 @@ public abstract class Competition {
   public List<Competitor> getAllCompetitors() {
 	  return this.competitors;
   }
+
+
+  /**
+   * Resets the number of points of all competitor from the list 
+   */
+  public void resetPoints() {
+    for(Competitor c : this.competitors) {
+      c.setPoints(0);
+    }
+  }
+
 
 
   /**

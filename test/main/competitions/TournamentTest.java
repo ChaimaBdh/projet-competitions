@@ -30,5 +30,14 @@ class TournamentTest extends CompetitionTest{
 			new Tournament(comps);
 		});
 	}
-
+	
+	@Test
+	public void tournamentTest() {
+		t.play(this.comps);
+		int allpts=0;
+		for (Competitor c : comps){
+			allpts += c.getPoints();
+		}
+		assertEquals(comps.size()-1,allpts);
+	}
 }

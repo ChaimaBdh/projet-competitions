@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.Competitor;
+import main.match.RandomWinner;
 import main.mocks.MockMatch;
 
 class RandomWinnerTest {
@@ -21,7 +22,6 @@ class RandomWinnerTest {
 		ma=new MockMatch(c1,c2);
 		r=new RandomWinner();
 	}
-	
 	@Test
 	void testGetWinner() {
 		assertEquals(0,ma.test);

@@ -1,9 +1,6 @@
-package main.strategy;
+package main.match;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import java.util.*;
 import main.*;
 
 /** A class that describes how to get a random winner */
@@ -15,7 +12,7 @@ public class RandomWinner implements Match {
 	
 	
 	/**
-	 * @see main.Match#getWinner(Competitor, Competitor)
+	 * @see main.match.Match#getWinner(Competitor, Competitor)
 	 */
 	public void getWinner(Competitor c1, Competitor c2) {
 		  Random rand = new Random();
@@ -29,7 +26,7 @@ public class RandomWinner implements Match {
 	
 	
 	/**
-	 * @see main.Match#toString()
+	 * @see main.match.Match#toString()
 	 */
 	public String toString() {
 		return "Random winner : a random winner will be returned";

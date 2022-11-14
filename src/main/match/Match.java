@@ -1,4 +1,6 @@
-package main;
+package main.match;
+
+import main.Competitor;
 
 /** An interface to define a Match */
 public interface Match {

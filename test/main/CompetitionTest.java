@@ -5,8 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.jupiter.api.*;
 
 import main.exceptions.UnknownPlayerException;
+import main.match.Match;
+import main.match.RandomWinner;
 import main.mocks.MockCompetition;
-import main.strategy.RandomWinner;
 
 public abstract class CompetitionTest {
 	
@@ -21,8 +22,8 @@ public abstract class CompetitionTest {
 	void init() {
 		c1 = new Competitor("Blastoff");
 		c2 = new Competitor("Drift");
-		c3 = new Competitor("Catalyst", 1);
-		c4 = new Competitor("Raven", 8);
+		c3 = new Competitor("Catalyst");
+		c4 = new Competitor("Raven");
 		this.comps = new ArrayList<Competitor>();
 		m=new MockCompetition(comps);
 		comps.add(c1);
@@ -63,33 +64,17 @@ public abstract class CompetitionTest {
 		assertEquals(0,m.test);
 		m.play();
 		assertEquals(1,m.test);
-		m.play(comps);
-		m.playMatch(c1, c2);
-		m.playMatch(c3, c4);
-		assertEquals(4,m.test);
 	}
 	
 	@Test
 	void testRanking() {
 		c5=new Competitor("Lynx");
-		assertTrue(m.ranking().containsKey(c1));
-		assertFalse(m.ranking().containsKey(c5));
-		assertEquals(4,m.ranking().size());
-		m.displayRanking();
+		assertTrue(c.ranking().containsKey(c1));
+		assertFalse(c.ranking().containsKey(c5));
+		assertEquals(4,c.ranking().size());
+		c.displayRanking();
 	}
-	
-	
-	@Test
-	void testMatch(){
-		assertEquals(0,m.getAllMatch().size());
-		m.matchs.add(rand);
-		assertEquals(1,m.getAllMatch().size());
-		assertEquals(0,m.test);
-		m.displayMatchPossible();
-		m.selectMatch();
-		assertEquals(2,m.test);
-	}
-		
+			
 	public abstract Competition createOneCompetition();
 
 }

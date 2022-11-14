@@ -1,4 +1,4 @@
-all: doc competition.jar 
+all: doc competition.jar
 
 doc:
 	# génération de la documentation
@@ -10,7 +10,7 @@ cls:
 
 test: cls
 	# tests
-	javac -d classes -classpath ./lib/junit-platform-console-standalone-1.9.0.jar ./src/main/*.java  ./src/main/competitions/*.java ./src/main/strategy/*.java ./src/main/exceptions/*.java ./src/main/util/*.java ./test/main/*.java ./test/main/competitions/*.java ./test/main/mocks/*.java ./test/main/strategy/*.java
+	javac -d classes -classpath ./lib/junit-platform-console-standalone-1.9.0.jar ./src/main/*.java  ./src/main/competitions/*.java ./src/main/strategy/*.java ./src/main/exceptions/*.java ./src/main/util/*.java ./src/main/match/*.java ./test/main/*.java ./test/main/competitions/*.java ./test/main/mocks/*.java ./test/main/strategy/*.java
 	java -jar ./lib/junit-platform-console-standalone-1.9.0.jar -cp classes --scan-classpath --disable-banner
 
 competition.jar: cls

@@ -25,35 +25,5 @@ public class MockCompetition extends Competition {
 	public void play(List<Competitor> comp) {
 		this.test++;
 	}
-		
-	/** Tests the method's call
-	 * @param c1 the first competitor 
-	 * @param c2 the second competitor
-	 */
-	@Override 
-	public void playMatch(Competitor c1, Competitor c2) {
-		this.test++;
-	}
-	
-	
-
-	/** 
-	 * Tests the method's call
-	 */
-	@Override 
-	public void displayMatchPossible() {
-		this.test++;
-	}
-
-	 
-
-	/** 
-	 * Tests the method's call
-	 */
-	@Override 
-	public void selectMatch() {
-		this.test++;
-	 }
-	  
-	  
+			  
 }

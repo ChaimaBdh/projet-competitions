@@ -7,7 +7,7 @@ import main.exceptions.*;
 /** A class that represents a Tournament (a kind of competition) */
 public class Tournament extends Competition {
 
-	/** 
+	/**
 	 * @see main.Competition#Competition
 	 * @param comp the competitor's list
 	 */
@@ -26,24 +26,19 @@ public class Tournament extends Competition {
 		while(n%2 == 0) {
 			n = n/2;
 		}
-		if(n == 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return n == 1;
 	}
 
 
 	/**
-	 * @see main.Competition#play() play(comp) 
+	 * @see main.Competition#play() play(comp)
 	 */
 	@Override
 	protected void play(List<Competitor> comp) {
 		Queue<Competitor> queue = new LinkedList<>(comp);
 		Competitor winner;
 
-		while(queue.size() != 1) {
+		while(queue.size()!=1) {
 			// we remove the first 2 elements from the linked list to obtain 2 competitors
 			Competitor c1 = queue.poll();
 			Competitor c2 = queue.poll();
