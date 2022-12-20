@@ -3,16 +3,18 @@ package main.competitions;
 import main.*;
 import java.util.*;
 import main.exceptions.*;
+import main.observer.CompetitionObserver;
 
 /** A class that represents a Tournament (a kind of competition) */
 public class Tournament extends Competition {
 
 	/**
-	 * @see main.Competition#Competition
+	 * @see main.competitions.Competition#Competition
 	 * @param comp the competitor's list
+	 * @param obs the list of competitor's observers 
 	 */
-	public Tournament(List<Competitor> comp) {
-		super(comp);
+	public Tournament(List<Competitor> comp, List<CompetitionObserver> obs) {
+		super(comp, obs);
 		if(!isPowerOfTwo(comp.size())) {
 			throw new NotAPowerOfTwoException("Cannot play a tournament : number of competitors is not a power of two ! ");
 		}
@@ -31,7 +33,7 @@ public class Tournament extends Competition {
 
 
 	/**
-	 * @see main.Competition#play() play(comp)
+	 * @see main.competitions.Competition#play() play(comp)
 	 */
 	@Override
 	protected void play(List<Competitor> comp) {

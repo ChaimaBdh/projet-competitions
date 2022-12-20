@@ -22,6 +22,10 @@ cd Boudehane_Mounguengui-COO/Projet
 
 # Avec le Makefile
 
+
+**NB: vous pouvez faire la commande `make` directement pour générer la documentation et le jar en une seule fois**    
+
+
 ## Génération et consultation de la documentation  
 
 *générer*
@@ -65,9 +69,7 @@ make test
 ```bash
 make clean
 ```  
-
-**NB: vous pouvez faire la commande `make` directement pour générer la documentation et le jar en une seule fois**    
-
+  
 
 # Sans Makefile  
 
@@ -109,7 +111,7 @@ java -jar competition.jar
 *compiler*  
 
 ```bash
-javac -d classes -classpath ./lib/junit-platform-console-standalone-1.9.0.jar ./src/main/*.java  ./src/main/competitions/*.java ./src/main/strategy/*.java ./src/main/exceptions/*.java ./src/main/util/*.java ./src/main/match/*.java ./test/main/*.java ./test/main/competitions/*.java ./test/main/mocks/*.java ./test/main/strategy/*.java
+javac -d classes -classpath ./lib/junit-platform-console-standalone-1.9.0.jar ./src/main/*.java  ./src/main/competitions/*.java  ./src/main/decorator/*.java ./src/main/strategy/*.java ./src/main/exceptions/*.java ./src/main/util/*.java ./src/main/match/*.java ./src/main/observer/*.java ./test/main/*.java ./test/main/competitions/*.java ./test/main/mocks/*.java ./test/main/strategy/*.java ./test/main/observer/*.java ./test/main/decorator/*.java
 ```
 
 *exécuter*  
@@ -171,7 +173,7 @@ De plus, nous avons créé une classe de tests abstraite `CompetitionTest`, car 
 
 
 
-## Livrable 2 (en cours)
+## Livrable 2
 
 ![](uml/UML-v2.jpg)      
 
@@ -190,8 +192,27 @@ Lors de l'écriture des tests, nous avons utilisé le pattern `factory method`. 
 Le pattern `Strategy` a été essentiel pour la sélection des compétiteurs en phase finale. Pour permettre la sélection des compétiteurs, nous avons créé une interface `Selection` implémentée par trois classes :   
 
 * **SelectFirst** : sélectionne les premiers de chaque poule. *(Master 16)*
-* **SelectTwoFirst** : sélectionne les 2 premiers de chaque poule. *(Master 24)*
-* **SelectTwoFirstThenTwoBestThird** : sélectionne les 2 premiers de chaque poule puis les 2 meilleurs troisièmes. *(Master 32)* 
+* **SelectTwoFirstThenTwoBestThird** : sélectionne les 2 premiers de chaque poule puis les 2 meilleurs troisièmes. *(Master 24)*
+* **SelectTwoFirst** : sélectionne les 2 premiers de chaque poule. *(Master 32)*
 
-Le type de sélection est précisé à la construction du Master afin que le nombre de compétiteurs en phase finale soit bien une puissance de 2. 
+Le type de sélection est précisé à la construction du Master afin que le nombre de compétiteurs en phase finale soit bien une puissance de 2.
 Ainsi le type de sélection sera spécifique au nombre de compétiteurs du Master.
+
+
+
+
+## Livrable 3
+
+![](uml/UML-v3.jpg)  
+
+## Choix de conception  
+
+
+Comme indiqué sur le sujet, nous nous sommes inspirés du pattern ` Observer` et nous l'avons choisi pour la modélisation de cette troisième partie.  
+Nous avons créé une interface `ObserverCompetition` qui sera implémentée par deux classes : `Journalist` et `Bookmaker`.
+En effet, les journalistes et les bookmaker sont ceux qui vont observer les matchs de chaque compétition et ainsi y réagir. Ces deux instances auront alors une méthode commune `reactToCompetition` (implémentée grâce à l'interface) qui prend en parametre un match.
+La méthode sera cependant différente : les journalistes diffuseront les résultats et les bookmaker feront évoluer la cote des compétiteurs.
+
+`Competition` est la classe observée. `competitionDetected` est la methode qui permet à chaque observer de reagir en detectant les matchs d'une competition. On a trouvé plus facile de faire ajouter directement les observateurs via une competition que via un match car on ne savait pas comment ajouter des observateurs via un match apres dans ce cas ou pour eviter de dupliquer du code en le fesant dans notre classe match et dans competition.
+
+On a utilisé le pattern `Decorator` pour permettre d'avoir deux journalistes  qui affichent des messages differents, de meme pour deux bookmakers qui affichent des côtes différentes en redefinisant la methode `reactToCompetition` dans les deux cas.

@@ -13,11 +13,4 @@ public class UnknownPlayerException extends Exception {
 		super();
 	}
 	
-	/** An exception is defined by its message thrown
-	 * @param msg the message thrown
-	 */
-	public UnknownPlayerException(String msg) {
-		super(msg);
-	}
-	
 }

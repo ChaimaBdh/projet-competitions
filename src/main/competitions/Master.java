@@ -2,8 +2,8 @@ package main.competitions;
 
 import java.util.*;
 
-import main.Competition;
 import main.Competitor;
+import main.observer.CompetitionObserver;
 import main.strategy.Selection;
 
 /** A class that handles a group stage and then a tournament between all finalists */
@@ -19,14 +19,15 @@ public class Master extends Competition {
 	private final List<League> groups;
 
 
-	/** A master is defined by its list of competitors, its selection of finalists and its number of group stage.
+	/** A Master is defined by its list of competitors, its selection of finalists and its number of group stage.
 	 * At its creation, the group stage is initialized depending on the number of group stage chosen
 	 * @param comp the list of competitors
 	 * @param strategy the selection's type
 	 * @param nbGroupStage the number of group stage chosen
+	 * @param obs the list of competitor's observers 
 	 */
-	public Master(List<Competitor> comp, Selection strategy, int nbGroupStage) {
-		super(comp);
+	public Master(List<Competitor> comp, Selection strategy, int nbGroupStage, List<CompetitionObserver> obs) {
+		super(comp, obs);
 		this.selection = strategy;
 		this.nbOfGroupStage = nbGroupStage;
 		this.groups = this.buildGroupStage();
@@ -61,7 +62,7 @@ public class Master extends Competition {
 			for(int j = 0; j < nbCompsPerGroup; j++) {
 				compsGroup.add(this.competitors.get(i * nbCompsPerGroup + j));
 			}
-			leagues.add(new League(compsGroup));
+			leagues.add(new League(compsGroup, this.observers));
 		}
 		return leagues;
 	}
@@ -77,7 +78,10 @@ public class Master extends Competition {
 		System.out.print("========== Group phase  ========== \n");
 		System.out.print(" \n");
 		for(League l : this.groups) {
-			System.out.println("*** Group "+i+" ***");
+			System.out.println("=============");
+			System.out.println("  Group "+i+" ");
+			System.out.println("=============");
+			System.out.print("\n");
 			l.play();
 			i++;
 			System.out.print("\n");
@@ -118,7 +122,7 @@ public class Master extends Competition {
 	 * @param finalists the list of final competitors
 	 */
 	public void playFinalStage(List<Competitor> finalists) {
-		Tournament t = new Tournament(finalists);
+		Tournament t = new Tournament(finalists, this.observers);
 		System.out.print("=== The Finalists === \n");
 		System.out.print(finalists);
 		System.out.print(" \n");
@@ -132,7 +136,7 @@ public class Master extends Competition {
 	}
 
 	/**
-	 * @see main.Competition#play play(comp)
+	 * @see main.competitions.Competition#play play(comp)
 	 */
 	@Override
 	public void play(List<Competitor> comp) {

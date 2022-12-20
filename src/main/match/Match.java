@@ -6,15 +6,38 @@ import main.Competitor;
 public interface Match {
 	
 	
-	/** Returns the winner of the match
+	/** Sets the winner of the match
 	 * @param c1 the first competitor
 	 * @param c2 the second competitor
+	 * @return the random winner of the match
 	 */
-	public void getWinner(Competitor c1, Competitor c2);
+	public Competitor setWinner(Competitor c1, Competitor c2);
 	
+	
+	/** Sets the looser of the match
+	 * @param c1 the first competitor
+	 * @param c2 the second competitor
+	 * @return the random looser of the match
+	 */
+	public Competitor setLooser(Competitor c1, Competitor c2);
+	
+	
+	/**
+	 * @return the winner of the match
+	 */
+	public Competitor getWinner();
+	
+	
+	/**
+	 * @return the looser of the match 
+	 */
+	public Competitor getLooser();
+
+
 	/** 
 	 * @return a string representation for a match
 	 */
 	public String toString();
+	
 
 }

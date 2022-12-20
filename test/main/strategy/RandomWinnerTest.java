@@ -19,19 +19,16 @@ class RandomWinnerTest {
 	void init() {
 		c1 = new Competitor("Blastoff");
 		c2 = new Competitor("Drift");
-		ma=new MockMatch(c1,c2);
-		r=new RandomWinner();
+		ma=new MockMatch();
 	}
+	
 	@Test
-	void testGetWinner() {
-		assertEquals(0,ma.test);
-		ma.getWinner(c1, c2);
-		assertEquals(1,ma.test);
-	}
+	void testmockGetWinner() {
+		assertEquals(c1,ma.setWinner(c1, c2));
+		assertEquals(c2,ma.setLooser(c1, c2));
+		assertEquals("Competitor c1 is the winner",ma.toString());
+		}
+	
 
-	@Test
-	void testToString() {
-		assertEquals("Random winner : a random winner will be returned",r.toString());
-	}
 
 }

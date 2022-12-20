@@ -12,11 +12,6 @@ public class NotAPowerOfTwoException extends RuntimeException {
 	 */
 	
 
-	/** */
-	public NotAPowerOfTwoException() {
-		super();
-	}
-		
 	/** An exception is defined by its message thrown
 	 * @param msg the message thrown
 	 */

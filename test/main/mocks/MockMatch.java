@@ -6,22 +6,47 @@ import main.match.Match;
 public class MockMatch implements Match {
 	
 	public int test;
+	@SuppressWarnings("unused")
+	private Competitor c1,c2,winner,looser;
 	
-	
-	public MockMatch(Competitor c1, Competitor c2) {
-		super();
-		this.test=0;
+	public MockMatch() {
 	}
 	
 	
 
 	/** 
 	 * Tests the method's call
+	 * @return 
 	 */
 	@Override
-	public void getWinner(Competitor c1, Competitor c2) {
-		this.test++;	
+	public Competitor setWinner(Competitor c1, Competitor c2) {
+		return c1;	
 	}
 	
+	/**
+	 * @see main.match.Match#toString()
+	 */
+	public String toString() {
+		return "Competitor c1 is the winner";
+	}
+	
+
+	@Override
+	public Competitor getWinner() {
+		return c1;
+	}
+
+
+	@Override
+	public Competitor getLooser() {
+		return c2;
+	}
+
+
+
+	@Override
+	public Competitor setLooser(Competitor c1, Competitor c2) {
+		return c2;
+	}
 
 }
