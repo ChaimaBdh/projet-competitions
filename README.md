@@ -17,7 +17,7 @@ git clone git@github.com:ChaimaBdh/projet-competitions.git
 *se placer dans le répertoire*  
 
 ```bash
-cd Boudehane_Mounguengui-COO/Projet
+cd projet-competitions
 ```
 
 # Avec le Makefile
