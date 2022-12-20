@@ -11,7 +11,7 @@
 ## Récupérer le projet  
 
 ```bash
-git clone git@gitlab-etu.fil.univ-lille.fr:chaima.boudehane.etu/Boudehane_Mounguengui-COO.git
+git clone git@github.com:ChaimaBdh/projet-competitions.git
 ```
 
 *se placer dans le répertoire*  
